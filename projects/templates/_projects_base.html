@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}eScience Projects{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script type="text/javascript" src="{{ url_for('projects_static', filename='projects.js') }}"></script>
+{% endblock %}
