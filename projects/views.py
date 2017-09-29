@@ -96,3 +96,7 @@ def tag_native_search():
 @app.route('/static/<filename>')
 def projects_static(filename):
     return send_from_directory(app.config['PROJECTS_STATIC_FOLDER'], filename)
+
+@app.route('/static/images/<filename>')
+def projects_images(filename):
+    return send_from_directory(app.config['PROJECTS_STATIC_FOLDER'] + "/images/", filename)

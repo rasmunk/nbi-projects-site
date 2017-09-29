@@ -17,8 +17,8 @@ class FairTestCase(unittest.TestCase):
     def tearDown(self):
         pass
         # Clean up
-        #Project.clear()
-        #self.assertTrue(len(Project.get_all()) == 0)
+        Project.clear()
+        self.assertTrue(len(Project.get_all()) == 0)
 
 
 

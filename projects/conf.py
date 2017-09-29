@@ -14,9 +14,6 @@ for key, folder in folders.items():
     except FileExistsError:
         pass
 
-# common static folder path
-app.config['STATIC_FOLDER'] = os.path.abspath("nbi_base/static")
-
 ## Default db target
 app.config['DB'] = app.config['DATA_FOLDER'] + "/projects_dev"
 

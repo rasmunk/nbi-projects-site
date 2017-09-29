@@ -12,14 +12,6 @@ csrf = CSRFProtect(app)
 app.secret_key = os.urandom(24)
 Bootstrap(app)
 
-print("all temp: " + str(all_temp))
-print("Instance path: " + app.instance_path)
-print("Root path: " + app.root_path)
-print("Static urlpath: " + app.static_url_path)
-print("static folder: " + app.static_folder)
-print("obs path: " + os.path.abspath(""))
-
-
 ## Setup projects config statics
 import projects.conf
 import projects.nav
