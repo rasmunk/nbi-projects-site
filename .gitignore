@@ -102,10 +102,8 @@ ENV/
 
 .idea/
 
-images/
-
 # No need to include test database
 tests/data/
 
 # Dont include data
-persistence/
+persistence/*

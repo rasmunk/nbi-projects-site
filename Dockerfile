@@ -35,18 +35,12 @@ RUN chown root:www-data -R /var/www && \
     chmod 775 -R /var/www && \
     chmod 2755 -R /var/www/projects/wsgi
 
-# Mount data volumne to the persistence path
-VOLUME /var/www/projects/persistence
-
 # Copy in the source code
 COPY . /app
 WORKDIR /app
 
 # Install the code and cleanup
-RUN mkdir -p /usr/var/projects-instance && \
-    chown root:www-data /usr/var/projects-instance && \
-    chmod 775 -R /usr/var/projects-instance && \
-    pip3 install setuptools && \
+RUN pip3 install setuptools && \
     pip3 install Flask wtforms && \
     python3 setup.py install
     #python3 setup.py test && \
