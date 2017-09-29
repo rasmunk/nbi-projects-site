@@ -30,21 +30,23 @@ def show(id):
 
 @app.route('/create_project', methods=['GET', 'POST'])
 def create():
-    form = ProjectForm(CombinedMultiDict((request.files, request.form)))
-    if form.validate_on_submit():
-        f = form.image.data
-        filename = str(secure_filename(f.filename))
-        f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
-        project_data = {key: field.data for key, field in form.__dict__.items() if
-                        hasattr(field, 'data') and key != 'csrf_token' and key != 'image'}
-        project_data['image'] = filename
-        project = Project(**project_data)
-        project.save()
-        url = url_for('show', id=project._id, _external=True)
-        flash("Your submission has been received, your metadata can be found at: " + url, 'success')
-        return redirect(url)
-    return render_template('create_project.html', form=form)
-
+    admin = False
+    if admin:
+        form = ProjectForm(CombinedMultiDict((request.files, request.form)))
+        if form.validate_on_submit():
+            f = form.image.data
+            filename = str(secure_filename(f.filename))
+            f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
+            project_data = {key: field.data for key, field in form.__dict__.items() if
+                            hasattr(field, 'data') and key != 'csrf_token' and key != 'image'}
+            project_data['image'] = filename
+            project = Project(**project_data)
+            project.save()
+            url = url_for('show', id=project._id, _external=True)
+            flash("Your submission has been received, your metadata can be found at: " + url, 'success')
+            return redirect(url)
+        return render_template('create_project.html', form=form)
+    return redirect(url_for('projects'))
 
 @app.route('/update/<id>', methods=['POST'])
 def update(id):

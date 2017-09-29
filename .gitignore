@@ -106,4 +106,4 @@ ENV/
 tests/data/
 
 # Dont include data
-persistence/*
+projects/persistence/*
