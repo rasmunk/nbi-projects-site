@@ -17,16 +17,16 @@
     {{ nav.nav_bar.render() }}
     {# flashes #}
     <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <ul class=flashes>
+        <ul class="flashes" id="flashes">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
                     {% for category, message in messages %}
                         <div class="alert alert-{{ category }}" role="alert">
                             {{ message }}
                         </div>
                     {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
+                {% endif %}
+            {% endwith %}
+        </ul>
     </div>
 {% endblock %}

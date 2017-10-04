@@ -37,6 +37,54 @@ function createProjectTile(project) {
 }
 
 
-$(document).ready(function() {
-   setupTagSearch(createProjectTile);
+function setupRequestAuth() {
+    var btn = document.getElementById('btn-register');
+    btn.onclick = function () {
+        $('.loading-spinner').show();
+        var _data = {
+            'email': $('#email').val(),
+            'csrf_token': $('#csrf_token').val()
+        };
+        console.log(_data);
+        $.ajax({
+            url: '/request_auth',
+            data: _data,
+            type: 'POST',
+            success: function (response) {
+                $('.loading-spinner').hide();
+                var flashes = document.getElementById('flashes');
+                removeChildren(flashes);
+                var json_response = response['data'];
+                for (var key in json_response) {
+                    if (json_response.hasOwnProperty(key)) {
+                        var messageContainer = document.createElement('div');
+                        messageContainer.setAttribute('class', "alert alert-" + key);
+                        messageContainer.setAttribute('role', 'alert');
+                        messageContainer.innerText = json_response[key];
+                        flashes.append(messageContainer);
+                    }
+                }
+            },
+            error: function (error) {
+                $('.loading-spinner').hide();
+                var flashes = document.getElementById('flashes');
+                removeChildren(flashes);
+                var json_response = error.responseJSON['data'];
+                for (var key in json_response) {
+                    if (json_response.hasOwnProperty(key)) {
+                        var messageContainer = document.createElement('div');
+                        messageContainer.setAttribute('class', "alert alert-" + key);
+                        messageContainer.setAttribute('role', 'alert');
+                        messageContainer.innerText = json_response[key];
+                        flashes.append(messageContainer);
+                    }
+                }
+            }
+        });
+    }
+}
+
+$(document).ready(function () {
+    setupTagSearch(createProjectTile);
+    setupRequestAuth();
 });

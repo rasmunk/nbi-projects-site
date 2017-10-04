@@ -10,6 +10,7 @@ def nav_bar():
     return Navbar(
         View('eScience Projects', '.projects'),
         View('Projects', '.projects'),
-        #View('Create Project', '.create'),
+        View('Create Project', '.create'),
+        View('Login', '.login'),
     )
 nav.init_app(app)

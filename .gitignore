@@ -107,3 +107,6 @@ tests/data/
 
 # Dont include data
 projects/persistence/*
+
+# Dont ignore salt
+salt.file
