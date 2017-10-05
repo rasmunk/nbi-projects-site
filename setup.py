@@ -15,7 +15,9 @@ setup(
         'flask-wtf',
         'WTForms',
         'requests',
-        'wtforms-components'
+        'wtforms-components',
+        'flask_login',
+        'flask_mail'
     ],
     setup_requires=[
         'pytest-runner',
