@@ -17,7 +17,8 @@ def is_safe_url(target):
 ## LoginManager
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get_id(user_id)
+    user = User.get(user_id)
+    return user
 
 
 def generate_confirmation_token(email):

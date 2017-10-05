@@ -36,7 +36,7 @@ function createProjectTile(project) {
     return newDiv;
 }
 
-
+// Login page only
 function setupRequestAuth() {
     var btn = document.getElementById('btn-register');
     btn.onclick = function () {
@@ -45,7 +45,6 @@ function setupRequestAuth() {
             'email': $('#email').val(),
             'csrf_token': $('#csrf_token').val()
         };
-        console.log(_data);
         $.ajax({
             url: '/request_auth',
             data: _data,
@@ -84,7 +83,16 @@ function setupRequestAuth() {
     }
 }
 
-$(document).ready(function () {
-    setupTagSearch(createProjectTile);
-    setupRequestAuth();
-});
+// Projects page
+if (location.pathname.match(/\/search$/i) || location.pathname == '/projects') {
+    $(document).ready(function () {
+        setupTagSearch(createProjectTile);
+    });
+}
+
+// Login page
+if (location.pathname == '/login') {
+    $(document).ready(function () {
+        setupRequestAuth();
+    });
+}

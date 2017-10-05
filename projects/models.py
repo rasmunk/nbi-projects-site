@@ -1,4 +1,5 @@
 from nbi_base.models import ShelveObject
+from bcrypt import checkpw
 
 
 class Project(ShelveObject):
@@ -24,11 +25,10 @@ class User(ShelveObject):
 
     @staticmethod
     def valid_user(email, password):
-        users = User.get_all()
-        for user in users:
-            if user.email == email and user.password == password:
-                return True
-        return False
+        user = User.get_with_first('email', email)
+        if user is not None and checkpw(bytes(password, 'utf-8'), user.password):
+            return user
+        return None
 
     def is_authenticated(self):
         return self.__dict__['is_authenticated']
@@ -40,4 +40,4 @@ class User(ShelveObject):
         return self.__dict__['is_anonymous']
 
     def get_id(self):
-        return self.__dict__['_id']
+        return self._id

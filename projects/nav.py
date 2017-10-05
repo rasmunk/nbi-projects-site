@@ -1,4 +1,5 @@
 from projects import app
+from flask_login import current_user
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 
@@ -7,10 +8,20 @@ nav = Nav()
 
 @nav.navigation()
 def nav_bar():
-    return Navbar(
+    navbar = list(Navbar(
         View('eScience Projects', '.projects'),
         View('Projects', '.projects'),
-        View('Create Project', '.create'),
-        View('Login', '.login'),
-    )
+    ).items)
+    if current_user.is_authenticated:
+        navbar.extend([
+            View('Create Project', '.create'),
+            View('Logout', '.logout'),
+        ])
+    else:
+        navbar.extend([
+            View('Login', '.login'),
+        ])
+
+    return Navbar('eScience Projects', *navbar)
+
 nav.init_app(app)

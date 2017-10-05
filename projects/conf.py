@@ -24,7 +24,7 @@ app.config['DB'] = app.config['DATA_FOLDER'] + "/projects_dev"
 exists = os.path.isfile(os.path.abspath("salt.file"))
 if exists:
     string = open(os.path.abspath("salt.file"), 'r').read()
-    salt = string.encode()
+    salt = str(string)
 else:
     salt = gensalt()
     open(os.path.abspath("salt.file"), 'w').write(str(salt, 'utf-8'))
@@ -47,6 +47,6 @@ app.config['MAIL_PASSWORD'] = os.environ['MAIL_PASSWORD']
 
 # TODO -> remove before commit
 # Debug
-user = User.get_with_first('email', app.config['ADMINS'][0])
-if user is not None:
-    User.remove(user._id)
+#user = User.get_with_first('email', app.config['ADMINS'][0])
+#if user is not None:
+#    User.remove(user._id)
