@@ -21,8 +21,8 @@ class ProjectForm(FlaskForm):
         FileAllowed(['jpg', 'png'], 'Only JPG and PNG images are allowed')
     ])
     tags = StringField('Tags', validators=[DataRequired(), Regexp(r'^[\w,:_\- ]*$',
+                                                message="Allowed tag characters include letters spaces and , : _ -")])
 
-                                                                  message="Allowed tag characters include letters spaces and , : _ -")])
 
 class AuthRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email(message='Invalid email address format'),

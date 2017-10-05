@@ -66,18 +66,7 @@ function setupRequestAuth() {
             },
             error: function (error) {
                 $('.loading-spinner').hide();
-                var flashes = document.getElementById('flashes');
-                removeChildren(flashes);
-                var json_response = error.responseJSON['data'];
-                for (var key in json_response) {
-                    if (json_response.hasOwnProperty(key)) {
-                        var messageContainer = document.createElement('div');
-                        messageContainer.setAttribute('class', "alert alert-" + key);
-                        messageContainer.setAttribute('role', 'alert');
-                        messageContainer.innerText = json_response[key];
-                        flashes.append(messageContainer);
-                    }
-                }
+                errorRender(error);
             }
         });
     }
