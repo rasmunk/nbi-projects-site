@@ -22,6 +22,13 @@ def projects():
     return render_template('projects.html', objects=objects, form=form)
 
 
+@app.route('/my_projects', methods=['GET'])
+@login_required
+def my_projects():
+    form = TagsSearchForm()
+    objects = [project for project in Project.get_all() if project._id in current_user.projects]
+    return render_template('projects.html', objects=objects, form=form)
+
 @app.route('/show/<id>', methods=['GET'])
 def show(id):
     form = ProjectForm()
@@ -96,7 +103,7 @@ def update(id):
     return render_template('project.html', object=project, form=form)
 
 
-# Sends approval emails to every app.config['ADMINS']
+# Sends approval emails to every app.config['ADMINS_EMAIL']
 @app.route('/request_auth', methods=['POST'])
 def request_auth():
     form = AuthRequestForm(request.form)
@@ -107,7 +114,7 @@ def request_auth():
             confirm_url = url_for('approve_auth', token=token)
             html = render_template('email/activate_user.html', email=form.email.data, confirm_url=confirm_url)
             msg = Message(subject=form.email.data + " requests eScience Projects access", html=html,
-                          recipients=app.config['ADMINS'], sender=app.config['MAIL_USERNAME'])
+                          recipients=app.config['ADMINS_EMAIL'], sender=app.config['MAIL_USERNAME'])
             mail.send(msg)
             return jsonify(data={'success': 'Request successfully submitted, awaiting admin approval'})
         else:

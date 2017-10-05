@@ -14,6 +14,7 @@ def nav_bar():
     ).items)
     if current_user.is_authenticated:
         navbar.extend([
+            View('My Projects', '.my_projects'),
             View('Create Project', '.create'),
             View('Logout', '.logout'),
         ])

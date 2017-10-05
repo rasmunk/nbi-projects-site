@@ -73,7 +73,7 @@ function setupRequestAuth() {
 }
 
 // Projects page
-if (location.pathname.match(/\/search$/i) || location.pathname == '/projects') {
+if (location.pathname.match(/\/search$/i) || location.pathname == '/projects' || location.pathname == '/my_projects') {
     $(document).ready(function () {
         setupTagSearch(createProjectTile);
     });
