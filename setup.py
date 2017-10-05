@@ -17,7 +17,8 @@ setup(
         'requests',
         'wtforms-components',
         'flask_login',
-        'flask_mail'
+        'flask_mail',
+        'bcrypt',
     ],
     setup_requires=[
         'pytest-runner',

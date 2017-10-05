@@ -1,6 +1,6 @@
 import os
 from projects import app
-from projects.models import User
+from getpass import getpass
 from bcrypt import gensalt
 
 
@@ -44,10 +44,5 @@ app.config['MAIL_PORT'] = 25
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_USERNAME'] = os.environ['MAIL_USERNAME']
-app.config['MAIL_PASSWORD'] = os.environ['MAIL_PASSWORD']
-
-# TODO -> remove before commit
-# Debug
-#user = User.get_with_first('email', app.config['ADMINS_EMAIL'][0])
-#if user is not None:
-#    User.remove(user._id)
+if 'MAIL_PASSWORD' not in app.config:
+    app.config['MAIL_PASSWORD'] = getpass('Provide the mail service users password')
