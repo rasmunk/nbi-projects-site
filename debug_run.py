@@ -1,4 +1,4 @@
-# Setup required environment variables
+# Load enviroment variables
 exec(open("./projects-envvars.py").read())
 from projects import app
 
