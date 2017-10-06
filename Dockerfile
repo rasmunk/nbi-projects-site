@@ -33,7 +33,10 @@ RUN a2enmod wsgi && a2enmod headers
 COPY ./projects /var/www/projects
 COPY ./nbi_base /var/www/nbi_base
 COPY ./app.wsgi /var/www/projects/wsgi/
-RUN chown root:www-data -R /var/www && \
+RUN mkdir -p /var/www/projects/persistence && \
+    chown root:www-data /var/www/projects/persistence && \
+    chown root:www-data -R /var/www && \
+    chmod 755 -R /var/www/projects/persistence && \
     chmod 775 -R /var/www && \
     chmod 2755 -R /var/www/projects/wsgi
 
