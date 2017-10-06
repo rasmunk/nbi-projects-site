@@ -15,17 +15,18 @@ for key, folder in folders.items():
     except FileExistsError:
         pass
 
-## Default db target
+# Default db target
 app.config['DB'] = app.config['DATA_FOLDER'] + "/projects_dev"
 
 # Password Salt
-exists = os.path.isfile(os.path.abspath("salt.file"))
+# Store in persistence directory
+exists = os.path.isfile(app.config['DATA_FOLDER'] + "/salt.file")
 if exists:
-    string = open(os.path.abspath("salt.file"), 'r').read()
+    string = open(app.config['DATA_FOLDER'] + "/salt.file", 'r').read()
     salt = str(string)
 else:
     salt = str(gensalt(), 'utf-8')
-    open(os.path.abspath("salt.file"), 'w').write(salt)
+    open(app.config['DATA_FOLDER'] + "/salt.file", 'w').write(salt)
 
 app.config['SECURITY_PASSWORD_SALT'] = salt
 

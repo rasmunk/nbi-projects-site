@@ -34,5 +34,8 @@ class FairTestCase(unittest.TestCase):
     def test_dummy(self):
         self.assertTrue(True)
 
+    def create_user(self):
+        pass
+
 if __name__ == '__main__':
     unittest.main()
