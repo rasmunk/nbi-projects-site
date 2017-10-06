@@ -1,12 +1,14 @@
 # Default Apache2 container
 FROM ubuntu:latest
 RUN apt update && apt install --no-install-recommends -y \
+    build-essential \
     apache2 \
     libapache2-mod-wsgi-py3 \
     python3 \
     python3-pip \
     python3-dev \
-    build-essential \
+    libssl-dev \
+    libffi-dev \
     htop \
     curl \
     net-tools \
