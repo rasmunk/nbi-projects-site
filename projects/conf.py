@@ -24,8 +24,8 @@ if exists:
     string = open(os.path.abspath("salt.file"), 'r').read()
     salt = str(string)
 else:
-    salt = gensalt()
-    open(os.path.abspath("salt.file"), 'w').write(str(salt, 'utf-8'))
+    salt = str(gensalt(), 'utf-8')
+    open(os.path.abspath("salt.file"), 'w').write(salt)
 
 app.config['SECURITY_PASSWORD_SALT'] = salt
 
