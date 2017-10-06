@@ -110,3 +110,6 @@ projects/persistence/*
 
 # Dont ignore salt
 salt.file
+
+# ignore environment file (locally contains username/passwords)
+projects-envvars.py
