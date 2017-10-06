@@ -1,8 +1,6 @@
 import os
 from projects import app
-from getpass import getpass
 from bcrypt import gensalt
-
 
 # Required folders
 folders = {}
@@ -35,14 +33,13 @@ app.config['SECURITY_PASSWORD_SALT'] = salt
 app.config['PROJECTS_STATIC_FOLDER'] = os.path.abspath("projects/static")
 
 # Application ADMINS_EMAIL
-app.config['ADMINS_EMAIL'] = os.environ['ADMINS_EMAIL']
+app.config['ADMINS_EMAIL'] = os.environ['ADMINS_EMAIL'].split(',')
 
 # Email application server
-# TODO -> switch from live to nbi email server
-app.config['MAIL_SERVER'] = 'smtp.live.com'
-app.config['MAIL_PORT'] = 25
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_SERVER'] = os.environ['MAIL_SERVER']
+app.config['MAIL_PORT'] = os.environ['MAIL_PORT']
+app.config['MAIL_USE_TLS'] = bool(os.environ['MAIL_USE_TLS'])
+app.config['MAIL_USE_SSL'] = False if os.environ['MAIL_USE_SSL'] == 'False' else True
 app.config['MAIL_USERNAME'] = os.environ['MAIL_USERNAME']
-if 'MAIL_PASSWORD' not in app.config:
-    app.config['MAIL_PASSWORD'] = getpass('Provide the mail service users password')
+app.config['MAIL_PASSWORD'] = os.environ['MAIL_PASSWORD']
+

@@ -29,6 +29,7 @@ def my_projects():
     objects = [project for project in Project.get_all() if project._id in current_user.projects]
     return render_template('projects.html', objects=objects, form=form)
 
+
 @app.route('/show/<id>', methods=['GET'])
 def show(id):
     form = ProjectForm()
@@ -111,7 +112,7 @@ def request_auth():
         # Send confirmation token
         if User.get_with_first('email', form.email.data) is None:
             token = generate_confirmation_token(email=form.email.data)
-            confirm_url = url_for('approve_auth', token=token)
+            confirm_url = url_for('approve_auth', token=token, _external=True)
             html = render_template('email/activate_user.html', email=form.email.data, confirm_url=confirm_url)
             msg = Message(subject=form.email.data + " requests eScience Projects access", html=html,
                           recipients=app.config['ADMINS_EMAIL'], sender=app.config['MAIL_USERNAME'])
@@ -144,7 +145,7 @@ def approve_auth(token):
             user.save()
 
             token = generate_confirmation_token(email=email)
-            reset_url = url_for('reset_password', token=token)
+            reset_url = url_for('reset_password', token=token, _external=True)
             html = render_template('email/reset_password.html', email=email, reset_password_url=reset_url)
             msg = Message(subject='eScience Projects Account approval', html=html, recipients=[email],
                           sender=app.config['MAIL_USERNAME'])
