@@ -3,7 +3,7 @@ from projects import app, mail
 from projects.models import Project, User
 from projects.forms import ProjectForm, AuthRequestForm, LoginForm, PasswordResetForm, FileRequired
 from nbi_base.forms import TagsSearchForm
-from flask import render_template, request, flash, redirect, url_for, jsonify, send_from_directory
+from flask import render_template, request, flash, redirect, url_for, jsonify, send_from_directory, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
 from werkzeug.datastructures import CombinedMultiDict
@@ -34,6 +34,10 @@ def my_projects():
 def show(id):
     form = ProjectForm()
     object = Project.get(id)
+    if object is None:
+        flash("That project dosen't exist", 'danger')
+        return redirect(url_for('projects'))
+
     owner = False
     if current_user.is_authenticated and id in current_user.projects:
         owner = True
@@ -78,6 +82,10 @@ def create():
 @login_required
 def update(id):
     project = Project.get(id)
+    if project is None:
+        flash("That project dosen't exist", 'danger')
+        return redirect(url_for('projects'))
+
     form = ProjectForm(CombinedMultiDict((request.files, request.form)))
     # Strip image upload validation on upload (Optional)
     form.image.validators = [validator for validator in form.image.validators if type(validator) is not FileRequired]
