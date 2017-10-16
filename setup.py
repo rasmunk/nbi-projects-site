@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='projects',
-    version='0.1.3',
+    version='0.1.4',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
@@ -12,7 +12,7 @@ setup(
         'Flask',
         'flask-bootstrap',
         'flask-nav',
-        'flask-wtf',
+        'flask_wtf',
         'WTForms',
         'requests',
         'wtforms-components',
