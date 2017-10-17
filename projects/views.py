@@ -92,7 +92,7 @@ def update(id):
     if form.validate_on_submit() and id in current_user.projects:
         # Only save the image if a new was submitted, else keep the old name
         f = form.image.data
-        if f != '':
+        if f.filename != '':
             filename = str(secure_filename(f.filename))
             f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
         else:
