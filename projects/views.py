@@ -89,9 +89,9 @@ def update(id):
     form = ProjectForm(CombinedMultiDict((request.files, request.form)))
     # Strip image upload validation on upload (Optional)
     form.image.validators = [validator for validator in form.image.validators if type(validator) is not FileRequired]
-    if form.validate_on_submit() and id in current_user.projects and project is not None:
+    if form.validate_on_submit() and id in current_user.projects:
         # Only save the image if a new was submitted, else keep the old name
-        f = form.image.data.filename
+        f = form.image.data
         if f != '':
             filename = str(secure_filename(f.filename))
             f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
@@ -110,6 +110,22 @@ def update(id):
         flash("Update Success, your data can be found at: " + url, 'success')
         return redirect(url)
     return render_template('project.html', object=project, form=form)
+
+@app.route('/delete/<id>', methods=['POST'])
+@login_required
+def delete(id):
+    project = Project.get(id)
+    if project is None:
+        flash("That project dosen't exist", 'danger')
+        return redirect(url_for('projects'))
+    if id in current_user.projects:
+        Project.remove(id)
+        current_user.projects.remove(id)
+        current_user.save()
+        flash("Project: " + project.name + " has been deleted", 'success')
+    else:
+        flash("Your trying to delete a project you don't own", 'danger')
+    return redirect(url_for('projects'))
 
 
 # Sends approval emails to every app.config['ADMINS_EMAIL']
