@@ -134,7 +134,8 @@ def request_auth():
     form = AuthRequestForm(request.form)
     if form.validate_on_submit():
         # Send confirmation token
-        if User.get_with_first('email', form.email.data) is None:
+        user = User.get_with_first('email', form.email.data)
+        if user is None:
             token = generate_confirmation_token(email=form.email.data)
             confirm_url = url_for('approve_auth', token=token, _external=True)
             html = render_template('email/activate_user.html', email=form.email.data, confirm_url=confirm_url)
