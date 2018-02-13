@@ -9,13 +9,10 @@ RUN apt update && apt install --no-install-recommends -y \
     python3-dev \
     libssl-dev \
     libffi-dev \
-    htop \
-    curl \
     net-tools \
     tzdata \
     ntp \
     ntpdate \
-    nano \
     supervisor
 
 ## Setup correct timezone
