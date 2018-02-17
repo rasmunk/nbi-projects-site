@@ -9,7 +9,7 @@ folders['DATA_FOLDER'] = app.config['DATA_FOLDER'] = os.path\
 folders['UPLOAD_FOLDER'] = app.config['UPLOAD_FOLDER'] = os.path\
     .abspath('projects/persistence/images')
 
-## Create required folders for the application if they don't exist
+# Create required folders for the application if they don't exist
 for key, folder in folders.items():
     try:
         os.makedirs(folder)

@@ -149,6 +149,7 @@ def delete(object_id):
     if object_id in current_user.projects:
         Project.remove(object_id)
         current_user.projects.remove(object_id)
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], entity.image))
         current_user.save()
         flash("Entity: " + entity.name + " has been deleted", 'success')
     else:
