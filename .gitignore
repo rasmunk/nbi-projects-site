@@ -105,7 +105,6 @@ ENV/
 # No need to include test database
 tests/data/
 
-<<<<<<< Updated upstream
 # Dont include data
 projects/persistence/*
 

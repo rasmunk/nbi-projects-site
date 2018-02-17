@@ -1,6 +1,6 @@
 import unittest
 import os
-exec(open("./projects-envvars.py").read())
+exec(open("../projects-envvars.py").read())
 from projects.models import Project
 from projects import app
 
@@ -11,8 +11,8 @@ class FairTestCase(unittest.TestCase):
 
         # Required folders
         folders = {}
-        folders['DATA_FOLDER'] = app.config['DATA_FOLDER'] = os.getcwd() + "/tests/data"
-        folders['UPLOAD_FOLDER'] = app.config['UPLOAD_FOLDER'] = os.getcwd() + "/tests/images"
+        folders['DATA_FOLDER'] = app.config['DATA_FOLDER'] = os.getcwd() + "/data"
+        folders['UPLOAD_FOLDER'] = app.config['UPLOAD_FOLDER'] = os.getcwd() + "/images"
         # Create required folders for the application if they don't exist
         for key, folder in folders.items():
             try:

@@ -1,6 +1,7 @@
 /**
  * Created by rasmusmunk on 27/09/2017.
  */
+// The nbi_common.js file needs to be loaded before this
 
 function createProjectTile(project) {
     var newHeader = document.createElement('h3');

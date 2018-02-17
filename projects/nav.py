@@ -25,4 +25,5 @@ def nav_bar():
 
     return Navbar('eScience Projects', *navbar)
 
+
 nav.init_app(app)

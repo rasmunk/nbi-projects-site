@@ -50,9 +50,9 @@ RUN mkdir -p $NBI_PROJECTS_DIR && \
     cp projects-envvars.py $NBI_PROJECTS_DIR/ && \
     echo "export NBI_PROJECTS_DIR ${NBI_PROJECTS_DIR}" >> /etc/apache2/envars && \
     pip3 install setuptools && \
-    pip3 install Flask wtforms && \
-    python3 setup.py install && \
-    python3 setup.py test
+    pip3 install -r requirements.txt && \
+    pip3 install -r tests/requirements.txt && \
+    python3 setup.py install
 
 EXPOSE 80
 ## Prepare supervisord

@@ -26,7 +26,8 @@ class User(ShelveObject):
     @staticmethod
     def valid_user(email, password):
         user = User.get_with_first('email', email)
-        if user is not None and checkpw(bytes(password, 'utf-8'), user.password):
+        if user is not None and checkpw(bytes(password, 'utf-8'),
+                                        user.password):
             return user
         return None
 
