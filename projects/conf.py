@@ -1,6 +1,5 @@
 import os
 from projects import app
-from bcrypt import gensalt
 
 # Required folders
 folders = {}
@@ -24,19 +23,8 @@ app.config['DB_LOCK'] = os.path.join(app.config['DATA_FOLDER'],
 # Default db target
 app.config['DB'] = os.path.join(app.config['DATA_FOLDER'], "projects_dev")
 
-# Password Salt
-# Store in persistence directory
-exists = os.path.isfile(os.path.join(app.config['DATA_FOLDER'], "salt.file"))
-if exists:
-    string = open(os.path.join(app.config['DATA_FOLDER'], "salt.file"),
-                  'r').read()
-    salt = str(string)
-else:
-    salt = str(gensalt(), 'utf-8')
-    open(os.path.join(app.config['DATA_FOLDER'], "salt.file"), 'w').write(
-        salt)
-
-app.config['SECURITY_PASSWORD_SALT'] = salt
+# Onetime authentication reset token salt
+app.config['ONETIME_TOKEN_SALT'] = os.urandom(24)
 
 # Projects static folder
 app.config['PROJECTS_STATIC_FOLDER'] = os.path.abspath("projects/static")

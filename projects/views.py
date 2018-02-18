@@ -12,7 +12,7 @@ from flask_mail import Message
 from werkzeug.datastructures import CombinedMultiDict
 from werkzeug.utils import secure_filename
 from projects.helpers import generate_confirmation_token, confirm_token
-from bcrypt import hashpw
+from bcrypt import hashpw, gensalt
 import datetime
 
 
@@ -202,8 +202,8 @@ def approve_auth(token):
             flash('That email has already been registered')
         else:
             # Setup
-            user = User(email=email, password=hashpw(os.urandom(24), bytes(
-                app.config['SECURITY_PASSWORD_SALT'], 'utf-8')),
+            user = User(email=email,
+                        password=hashpw(os.urandom(24), gensalt()),
                         projects=[], is_active=False, is_authenticated=False,
                         is_anonymous=False,
                         confirmed_on=datetime.datetime.now())
@@ -239,8 +239,7 @@ def reset_password(token):
             user.is_anonymous = False
             user.email = email
             user.password = hashpw(bytes(form.password.data, 'utf-8'),
-                                   bytes(app.config['SECURITY_PASSWORD_SALT'],
-                                         'utf-8'))
+                                   gensalt())
             user.save()
             flash('Your password has now been updated', 'success')
             return redirect(url_for('projects'))
