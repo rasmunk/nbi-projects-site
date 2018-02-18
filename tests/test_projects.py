@@ -23,7 +23,8 @@ class FairTestCase(unittest.TestCase):
                 pass
 
         app.config['WTF_CSRF_ENABLED'] = False
-        # Override default DB setting -> use a testing db instead of the default
+        # Override default DB setting
+        # -> use a testing db instead of the default
         app.config['DB'] = app.config['DATA_FOLDER'] + "/dataset_test"
         self.app = app.test_client()
 

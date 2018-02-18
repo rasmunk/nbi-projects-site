@@ -28,7 +28,7 @@ def generate_confirmation_token(email):
     return serializer.dumps(email, salt=app.config['SECURITY_PASSWORD_SALT'])
 
 
-## A token is valid for a day
+# A token is valid for a day
 def confirm_token(token, expiration=86400):
     serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     try:
@@ -47,7 +47,7 @@ def unique_name_encoding(name):
     extension
     """
     assert type(name) == str
-    return name + "." + str(base64.b64encode(urandom(10)))
+    return name + "_" + str(base64.b64encode(urandom(10)))
 
 
 def unique_name_decode(name):
@@ -56,5 +56,6 @@ def unique_name_decode(name):
     :return:
     """
     assert type(name) == str
-    idx = name.rfind('.png')
-    return name[:idx+4]
+    idx = name.rfind('_')
+    return name[:idx]
+
