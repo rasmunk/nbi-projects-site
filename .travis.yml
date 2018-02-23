@@ -8,4 +8,4 @@ install:
 script:
   pytest
 env:
-  - NBI_PROJECTS_DIR=/etc/projects
+  - NBI_PROJECTS_DIR=$TRAVIS_BUILD_DIR
