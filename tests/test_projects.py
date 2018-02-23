@@ -1,7 +1,6 @@
 import unittest
 import os
-exec(open(os.path.join(os.environ['NBI_PROJECTS_DIR'],
-                       'projects-envvars.py')).read())
+exec(open("../projects-envvars.py").read())
 from projects.models import Project
 from projects import app
 
