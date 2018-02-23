@@ -1,4 +1,5 @@
-# This file contains the environment variable setup that is required before the application is run
+# This file contains the environment variable setup that is required
+# before the application is run
 import os
 
 # Mail server setup for MAIL_USERNAME
@@ -8,7 +9,8 @@ os.environ['MAIL_PORT'] = '25'
 os.environ['MAIL_USE_TLS'] = 'True'
 os.environ['MAIL_USE_SSL'] = 'False'
 
-# Used to send authentication requests -> authenticates against the above specified server
+# Used to send authentication requests -> authenticates against
+# the above specified server
 os.environ['MAIL_USERNAME'] = 'replaceme'
 os.environ['MAIL_PASSWORD'] = 'replaceme'
 
