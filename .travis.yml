@@ -9,3 +9,5 @@ script:
   pytest
 env:
   - NBI_PROJECTS_DIR=$TRAVIS_BUILD_DIR
+notifications: 
+  slack: raz-s:se1PurXsQJv03nBZa9XWMOOS
