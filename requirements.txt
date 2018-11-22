@@ -1,7 +1,7 @@
 wheel==0.30.*
 Flask==0.12.*
 Jinja2==2.10
-requests==2.18.*
+requests==2.20.*
 Werkzeug==0.14.*
 wtforms==2.1.*
 pytest==3.2.3
