@@ -1,5 +1,8 @@
 # Default Apache2 container
 FROM ubuntu:latest
+# Don't prompt tzdata
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install --no-install-recommends -yq \
     apache2 \
     libapache2-mod-wsgi-py3 \
@@ -16,11 +19,11 @@ RUN apt-get update && apt-get install --no-install-recommends -yq \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Setup correct timezone
-RUN ln -fs /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime && \
-    dpkg-reconfigure -f noninteractive tzdata
+RUN mkdir -p /var/run/apache2
 
-# Setup fair configuration and disable the default conf
+ARG PROJECTS_DIR=/var/projects
+
+# Setup configuration
 # Also enable wsgi and header modules
 COPY ./apache2.conf /etc/apache2/sites-available/projects.conf
 RUN a2dissite 000-default.conf && \
@@ -31,37 +34,34 @@ RUN a2dissite 000-default.conf && \
     a2enmod rewrite
 
 # Prepare WSGI launcher script
-COPY ./projects /var/www/projects
+COPY ./projects $PROJECTS_DIR
 COPY ./nbi_base /var/www/nbi_base
-COPY ./app.wsgi /var/www/projects/wsgi/
-RUN mkdir -p /var/www/projects/persistence && \
-    chown root:www-data /var/www/projects/persistence && \
+COPY ./app.wsgi $PROJECTS_DIR/wsgi/
+RUN mkdir -p $PROJECTS_DIR/persistence && \
+    chown root:www-data $PROJECTS_DIR/persistence && \
     chown root:www-data -R /var/www && \
-    chmod 775 -R /var/www/projects/persistence && \
+    chmod 775 -R $PROJECTS_DIR/persistence && \
     chmod 775 -R /var/www && \
-    chmod 2755 -R /var/www/projects/wsgi
+    chmod 2755 -R $PROJECTS_DIR/wsgi
 
 # Copy in the source code
 COPY . /app
 WORKDIR /app
-ENV NBI_PROJECTS_DIR=/etc/projects
+ENV ENV_DIR=/etc/projects
 
 # Install the envvars script, code and cleanup
-RUN mkdir -p $NBI_PROJECTS_DIR && \
-    cp projects-envvars.py $NBI_PROJECTS_DIR/ && \
-    echo "export NBI_PROJECTS_DIR ${NBI_PROJECTS_DIR}" >> /etc/apache2/envars && \
+RUN mkdir -p $ENV_DIR && \
+    cp projects-envvars.py $ENV_DIR/ && \
+    echo "export ENV_DIR ${ENV_DIR}" >> /etc/apache2/envars && \
     pip3 install setuptools && \
     pip3 install wheel==0.30.0 && \
     python3 setup.py bdist_wheel && \
     pip3 install -r requirements.txt && \
     pip3 install -r tests/requirements.txt && \
-    python3 setup.py install && \
-    pytest
+    python3 setup.py install
 
-RUN rm -r /app
+EXPOSE 80 443
 
-EXPOSE 80
-EXPOSE 443
 # Prepare supervisord
 RUN mkdir -p /var/log/supervisor
 # Insert supervisord config -> handles the startup procedure for the image

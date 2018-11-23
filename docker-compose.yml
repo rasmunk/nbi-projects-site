@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  web:
+    image: nielsbohr/projects:edge
+    container_name: projects
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+    volumes:
+      - projects-db:/var/projects/persistence
+      - projects-web:/var/www/public/well-known
+      - projects-certs:/etc/apache2/certs
+
+volumes:
+  projects-db:
+  projects-web:
+  projects-certs:
