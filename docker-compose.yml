@@ -8,11 +8,6 @@ services:
       - "80:80/tcp"
       - "443:443/tcp"
     volumes:
-      - projects-db:/var/projects/persistence
-      - projects-web:/var/www/public/well-known
-      - projects-certs:/etc/apache2/certs
-
-volumes:
-  projects-db:
-  projects-web:
-  projects-certs:
+      - ./persistence:/var/projects/persistence
+      - ./well-known:/var/www/public/well-known
+      - ./certs:/var/www/verts
