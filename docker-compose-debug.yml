@@ -10,5 +10,5 @@ services:
     ports:
       - "80:80/tcp"
     volumes:
-      - ./persistence:/var/projects/persistence
+      - ./persistence:/var/projects/persistence:rw
     command: python3 /var/projects/run.py --debug --port 80
