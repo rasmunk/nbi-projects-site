@@ -25,7 +25,7 @@ ARG PROJECTS_DIR=/var/projects
 
 # Setup configuration
 # Also enable wsgi and header modules
-COPY ./apache2.conf /etc/apache2/sites-available/projects.conf
+COPY apache/apache2-http.conf /etc/apache2/sites-available/projects.conf
 RUN a2dissite 000-default.conf && \
     a2ensite projects.conf && \
     a2enmod wsgi && \
@@ -36,8 +36,8 @@ RUN a2dissite 000-default.conf && \
 # Prepare WSGI launcher script
 COPY ./projects $PROJECTS_DIR/projects
 COPY ./nbi_base $PROJECTS_DIR/nbi_base
-COPY ./app.wsgi $PROJECTS_DIR/wsgi/
-COPY ./debug_run.py $PROJECTS_DIR/
+COPY apache/app.wsgi $PROJECTS_DIR/wsgi/
+COPY ./run.py $PROJECTS_DIR/
 RUN mkdir -p $PROJECTS_DIR/persistence && \
     chown root:www-data $PROJECTS_DIR/persistence && \
     chown root:www-data -R /var/www && \
