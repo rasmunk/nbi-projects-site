@@ -4,9 +4,9 @@ from projects import app
 # Required folders
 folders = {}
 folders['DATA_FOLDER'] = app.config['DATA_FOLDER'] = os.path\
-    .abspath('projects/persistence/data')
+    .abspath('persistence/data')
 folders['UPLOAD_FOLDER'] = app.config['UPLOAD_FOLDER'] = os.path\
-    .abspath('projects/persistence/images')
+    .abspath('persistence/images')
 
 # Create required folders for the application if they don't exist
 for key, folder in folders.items():

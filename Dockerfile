@@ -34,9 +34,10 @@ RUN a2dissite 000-default.conf && \
     a2enmod rewrite
 
 # Prepare WSGI launcher script
-COPY ./projects $PROJECTS_DIR
-COPY ./nbi_base /var/www/nbi_base
+COPY ./projects $PROJECTS_DIR/projects
+COPY ./nbi_base $PROJECTS_DIR/nbi_base
 COPY ./app.wsgi $PROJECTS_DIR/wsgi/
+COPY ./debug_run.py $PROJECTS_DIR/
 RUN mkdir -p $PROJECTS_DIR/persistence && \
     chown root:www-data $PROJECTS_DIR/persistence && \
     chown root:www-data -R /var/www && \
@@ -59,6 +60,9 @@ RUN mkdir -p $ENV_DIR && \
     pip3 install -r requirements.txt && \
     pip3 install -r tests/requirements.txt && \
     python3 setup.py install
+
+RUN rm -r /app
+WORKDIR $PROJECTS_DIR
 
 EXPOSE 80
 

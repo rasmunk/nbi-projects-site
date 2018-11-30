@@ -1,5 +1,11 @@
 # Load enviroment variables
-exec(open("./projects-envvars.py").read())
+import os
+if os.environ['ENV_DIR']:
+    exec(open(os.path.join(os.environ['ENV_DIR'],
+                           'projects-envvars.py')).read())
+else:
+    exec(open("./projects-envvars.py").read())
+
 import datetime
 from projects import app
 from projects.models import User

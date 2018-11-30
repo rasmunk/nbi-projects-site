@@ -105,11 +105,19 @@ ENV/
 # No need to include test database
 tests/data/
 
-# Dont include data
-projects/persistence/*
+# Don't include data
+persistence/*
+
+# Don't include certificates
+certs/*
+
+# Don't include 
+well-known/*
 
 # Dont ignore salt
 salt.file
 
 # ignore environment file (locally contains username/passwords)
 projects-envvars.py
+
+
