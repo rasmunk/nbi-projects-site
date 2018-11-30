@@ -5,9 +5,10 @@ services:
     image: nielsbohr/projects:latest
     container_name: projects
     ports:
-      - "80:80/tcp"
+      - "80:5000/tcp"
       - "443:443/tcp"
     volumes:
       - ./persistence:/var/projects/persistence
       - ./well-known:/var/www/public/well-known
       - ./certs:/var/www/verts
+    command: python3 debug_run.py
