@@ -60,7 +60,7 @@ RUN mkdir -p $ENV_DIR && \
     pip3 install -r tests/requirements.txt && \
     python3 setup.py install
 
-EXPOSE 80 443
+EXPOSE 80
 
 # Prepare supervisord
 RUN mkdir -p /var/log/supervisor

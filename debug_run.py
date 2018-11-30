@@ -16,4 +16,4 @@ if __name__ == '__main__':
                     is_authenticated=True, is_anonymous=False,
                     confirmed_on=datetime.datetime.now())
         user.save()
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)

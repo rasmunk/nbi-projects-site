@@ -5,7 +5,7 @@ services:
     image: nielsbohr/projects:latest
     container_name: projects
     ports:
-      - "80:5000/tcp"
+      - "80:80/tcp"
       - "443:443/tcp"
     volumes:
       - ./persistence:/var/projects/persistence

@@ -10,4 +10,4 @@ services:
     volumes:
       - ./persistence:/var/projects/persistence
       - ./well-known:/var/www/public/well-known
-      - ./certs:/var/www/verts
+      - ./certs:/var/www/certs
