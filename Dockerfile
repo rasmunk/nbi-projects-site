@@ -36,13 +36,11 @@ RUN a2dissite 000-default.conf && \
 # Prepare WSGI launcher script
 COPY ./projects $PROJECTS_DIR/projects
 COPY ./nbi_base $PROJECTS_DIR/nbi_base
-COPY apache/app.wsgi $PROJECTS_DIR/wsgi/
+COPY ./apache/app.wsgi $PROJECTS_DIR/wsgi/
 COPY ./run.py $PROJECTS_DIR/
 RUN mkdir -p $PROJECTS_DIR/persistence && \
     chown root:www-data $PROJECTS_DIR/persistence && \
-    chown root:www-data -R /var/www && \
     chmod 775 -R $PROJECTS_DIR/persistence && \
-    chmod 775 -R /var/www && \
     chmod 2755 -R $PROJECTS_DIR/wsgi
 
 # Copy in the source code
