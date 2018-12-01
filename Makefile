@@ -5,7 +5,7 @@ TAG=edge
 all: clean build push
 
 build:
-	mkdir -p persistence
+	mkdir -m775 -p persistence
 	chgrp 33 persistence
 	docker build -t ${OWNER}/${IMAGE}:${TAG} .
 
