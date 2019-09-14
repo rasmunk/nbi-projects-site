@@ -1,3 +1,3 @@
-[submodule "nbi_base"]
-	path = nbi_base
-	url = https://github.com/rasmunk/nbi_base.git
+[submodule "projects_base"]
+	path = projects_base
+	url = https://github.com/rasmunk/projects_base.git

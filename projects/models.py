@@ -1,4 +1,4 @@
-from nbi_base.models import ShelveObject
+from projects_base.base.models import ShelveObject
 from bcrypt import checkpw
 
 

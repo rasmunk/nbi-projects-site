@@ -35,7 +35,7 @@ RUN a2dissite 000-default.conf && \
 
 # Prepare WSGI launcher script
 COPY ./projects $PROJECTS_DIR/projects
-COPY ./nbi_base $PROJECTS_DIR/nbi_base
+COPY ./projects_base $PROJECTS_DIR/projects_base
 COPY ./apache/app.wsgi $PROJECTS_DIR/wsgi/
 COPY ./run.py $PROJECTS_DIR/
 RUN mkdir -p $PROJECTS_DIR/persistence && \

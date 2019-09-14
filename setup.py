@@ -19,6 +19,7 @@ setup(
         'flask_login',
         'flask_mail',
         'bcrypt',
+        'configparser'
     ],
     setup_requires=[
         'pytest-runner',

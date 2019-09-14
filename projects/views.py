@@ -4,7 +4,7 @@ from projects.models import Project, User
 from projects.forms import ProjectForm, AuthRequestForm, LoginForm, \
     PasswordResetForm, FileRequired
 from projects.helpers import unique_name_encoding, unique_name_decode
-from nbi_base.forms import TagsSearchForm
+from projects_base.base.forms import TagsSearchForm
 from flask import render_template, request, flash, redirect, url_for, \
     jsonify, send_from_directory
 from flask_login import login_user, logout_user, login_required, current_user
@@ -22,7 +22,9 @@ import datetime
 def projects():
     form = TagsSearchForm()
     entities = Project.get_all()
-    return render_template('projects.html', objects=entities, form=form)
+    return render_template('projects.html', title=app.config['TITLE'],
+                           grid_header=app.config['TITLE'] + " Projects",
+                           objects=entities, form=form)
 
 
 @app.route('/my_projects', methods=['GET'])
@@ -171,7 +173,9 @@ def request_auth():
                                    email=form.email.data,
                                    confirm_url=confirm_url)
             msg = Message(subject=form.email.data
-                          + " requests eScience Projects access",
+                          + " requests {title} Projects access".format(
+                title=app.config['TITLE']
+            ),
                           html=html, recipients=app.config['ADMINS_EMAIL'],
                           sender=app.config['MAIL_USERNAME'])
             mail.send(msg)
@@ -213,7 +217,9 @@ def approve_auth(token):
             reset_url = url_for('reset_password', token=token, _external=True)
             html = render_template('email/reset_password.html', email=email,
                                    reset_password_url=reset_url)
-            msg = Message(subject='eScience Projects Account approval',
+            msg = Message(subject='{title} Projects Account approval'.format(
+                title=app.config['TITLE']
+            ),
                           html=html, recipients=[email],
                           sender=app.config['MAIL_USERNAME'])
             mail.send(msg)
