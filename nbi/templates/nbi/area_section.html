@@ -1,0 +1,11 @@
+{% if areas %}
+    <div class="area-section">
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+            {% for area in areas %}
+                <label class="btn btn-projects" id="{{ area }}">
+                    <input type="radio" name="options" id="{{ area }}"> {{ area }}
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

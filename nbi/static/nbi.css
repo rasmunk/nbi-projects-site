@@ -1,0 +1,21 @@
+.btn-projects {
+    background-color: gray;
+    color: white;
+}
+
+.btn-projects:active,
+.btn-projects:hover,
+.btn-projects:focus {
+    background-color: darkgray;
+    color: white;
+}
+
+.btn-projects.active {
+    background-color: darkgray;
+    color: white;
+    border-color: gray;
+}
+
+.area-section {
+    margin-bottom: 1.5em;
+}
