@@ -34,6 +34,7 @@ login_manager.login_view = 'login'
 def nbi_load_user(user_id):
     return load_user(user_id)
 
+
 # Connect mail
 mail = Mail(app)
 
