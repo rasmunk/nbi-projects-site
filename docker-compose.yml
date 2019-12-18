@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  web:
+    image: nielsbohr/nbi-projects-site:latest
+    container_name: nbi-projects-site
+    ports:
+      - "80:80/tcp"
+    volumes:
+      - ./persistence:/var/nbi-projects-site/persistence:rw
+      - ./res:/var/nbi-projects-site/res:ro
