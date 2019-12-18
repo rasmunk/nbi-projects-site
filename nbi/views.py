@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify
 from flask_login import login_required, current_user
-from nbi import nbi_blueprint
+from nbi import nbi_blueprint, csrf
 from projects_base.base.forms import TagsSearchForm
 from projects.models import Project
 from nbi.forms import NBIProjectForm, NBIProjectSearchForm
@@ -13,7 +13,7 @@ def projects():
     area_choices = NBIProjectForm.area.kwargs.get('choices')
     form = TagsSearchForm()
     entities = Project.get_all()
-    tags = Project.get_top_with('tags', num=10)
+    tags = Project.get_top_with('tags')
     return render_template('nbi/projects.html',
                            title=config.get('PROJECTS', 'title'),
                            grid_header="{}".format(
@@ -65,6 +65,10 @@ def tag_search(tag):
     tags = Project.get_top_with('tags')
     if form.validate():
         entities = Project.get_with_search('tags', form.tag.data)
+
+    # Create new form that has csrf -> enable that tag searches can be done
+    # via the returned form
+    form = TagsSearchForm(data={'tag': tag})
     return render_template('nbi/projects.html',
                            title=config.get('PROJECTS', 'title'),
                            grid_header="{}".format(

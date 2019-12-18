@@ -6,7 +6,6 @@
 
 
 function setupAreaSelection() {
-    console.log("Called");
     let selection = $('.btn-projects');
 
     selection.on('click', function (e) {
@@ -38,6 +37,13 @@ function setupAreaSelection() {
                 console.log(error);
             }
         });
+    });
+}
+
+// Projects page
+if (location.pathname.match(/\/tag$/i)) {
+    $(document).ready(function () {
+        setupTagSearch(createProjectTile);
     });
 }
 
