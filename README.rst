@@ -10,3 +10,4 @@ It relies on the `projects-site <https://github.com/rasmunk/projects-site>`_
 repo for the underlying features for providing the website.
 
 Example of it can be seen at `eScience Projects <https://projects.escience.dk>`_
+
