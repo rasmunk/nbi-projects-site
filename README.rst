@@ -1,5 +1,6 @@
 .. image:: https://travis-ci.org/rasmunk/nbi-projects-site.svg?branch=master
     :target: https://travis-ci.org/rasmunk/nbi-projects-site
+
 =================
 nbi-projects-site
 =================
