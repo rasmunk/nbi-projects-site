@@ -1,4 +1,4 @@
 pytest==3.2.3
 flake8==3.6.0
-projects-site>=0.0.9
+projects-site>=0.0.11
 docutils
