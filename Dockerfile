@@ -22,6 +22,14 @@ RUN mkdir -p $NBI_DIR/persistence && \
 COPY . /app
 WORKDIR /app
 
+ENV PROJECTS_ENV_DIR=/etc/projects
+
+# Install the envvars script, code and cleanup
+RUN mkdir -p $PROJECTS_ENV_DIR && \
+    echo "export ENV_DIR ${PROJECTS_ENV_DIR}" >> /etc/apache2/envars
+
+COPY ./projects-envvars-template.py $PROJECTS_ENV_DIR/
+
 # Install the envvars script, code and cleanup
 RUN pip3 install setuptools && \
     pip3 install wheel==0.30.0 && \

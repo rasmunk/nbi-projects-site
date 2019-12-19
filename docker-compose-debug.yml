@@ -13,4 +13,5 @@ services:
     volumes:
       - ./persistence:/var/nbi-projects-site/persistence:rw
       - ./res:/var/nbi-projects-site/res:ro
+      - ./res/projects-envvars.py:/etc/projects/projects-envvars.py:ro
     command: python3 /var/nbi-projects-site/run.py --debug --port 80

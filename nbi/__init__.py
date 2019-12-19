@@ -12,6 +12,7 @@ from projects.models import User
 from projects.helpers import load_user
 from projects.nav import nav_bar
 from nbi.forms import NBIProjectForm
+from nbi.conf import config
 
 app = Flask(__name__)
 nbi_blueprint = Blueprint('nbi', __name__,
