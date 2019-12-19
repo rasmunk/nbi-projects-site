@@ -13,7 +13,7 @@ def projects():
     area_choices = NBIProjectForm.area.kwargs.get('choices')
     form = TagsSearchForm()
     entities = Project.get_all()
-    tags = Project.get_top_with('tags')
+    tags = Project.get_top_with('tags', num=5)
     return render_template('nbi/projects.html',
                            title=config.get('PROJECTS', 'title'),
                            grid_header="{}".format(
@@ -62,7 +62,7 @@ def tag_search(tag):
     area_choices = NBIProjectForm.area.kwargs.get('choices')
     form = TagsSearchForm(data={'tag': tag}, csrf_enabled=False)
     entities = {}
-    tags = Project.get_top_with('tags')
+    tags = Project.get_top_with('tags', num=5)
     if form.validate():
         entities = Project.get_with_search('tags', form.tag.data)
 
