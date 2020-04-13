@@ -1,9 +1,9 @@
 .. image:: https://travis-ci.org/rasmunk/nbi-projects-site.svg?branch=master
     :target: https://travis-ci.org/rasmunk/nbi-projects-site
 
-=================
-nbi-projects-site
-=================
+======================
+escience-projects-site
+======================
 
 Website for the `escience <www.nbi.ku.dk/Forskning/escience/>`_  department at
 `KU <https://www.ku.dk>`_.
