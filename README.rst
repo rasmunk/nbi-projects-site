@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/rasmunk/escience-projects.svg?branch=master
-    :target: https://travis-ci.org/rasmunk/escience-projects
+.. image:: https://travis-ci.org/ucphhpc/escience-projects-site.svg?branch=master
+    :target: https://travis-ci.org/ucphhpc/escience-projects-site
 
 =================
 escience-projects
