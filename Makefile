@@ -1,13 +1,14 @@
 OWNER=nielsbohr
-IMAGE=nbi-projects-site
+IMAGE=escience-projects
 TAG=edge
+ARGS=
 
 all: clean build push
 
 build:
 	mkdir -m775 -p persistence
 	chgrp 33 persistence
-	docker build -t ${OWNER}/${IMAGE}:${TAG} .
+	docker build -t ${OWNER}/${IMAGE}:${TAG} $(ARGS) .
 
 clean:
 	rm -fr persistence

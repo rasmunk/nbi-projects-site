@@ -1,6 +1,0 @@
-[submodule "projects_base"]
-	path = projects_base
-	url = https://github.com/rasmunk/projects_base.git
-[submodule "projects-site"]
-	path = projects-site
-	url = https://github.com/rasmunk/projects-site.git

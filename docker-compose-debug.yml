@@ -4,14 +4,11 @@ version: '3.7'
 # A WSGI stack should be used for production (docker-compose.yml)
 services:
   web:
-    image: nielsbohr/nbi-projects-site:edge
-    container_name: nbi-projects-site
-    environment:
-      FLASK_DEBUG: 1
+    image: nielsbohr/escience-projects:edge
+    container_name: escience-projects
     ports:
       - "80:80/tcp"
     volumes:
-      - ./persistence:/var/nbi-projects-site/persistence:rw
-      - ./res:/var/nbi-projects-site/res:ro
-      - ./res/projects-envvars.py:/etc/projects/projects-envvars.py:ro
-    command: python3 /var/nbi-projects-site/run.py --debug --port 80
+      - ./persistence:/var/escience-projects/persistence:rw
+      - ./res:/etc/escience-projects/res:ro
+      - ./supervisord-debug.conf:/etc/supervisor/conf.d/supervisord.conf:ro

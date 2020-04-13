@@ -23,7 +23,7 @@ function setupAreaSelection() {
         }
 
         $.ajax({
-            url: '/projects',
+            url: '/index',
             data: data,
             type: 'POST',
             success: function (response) {
@@ -41,7 +41,7 @@ function setupAreaSelection() {
 }
 
 // Projects page
-if (location.pathname.match(/\/tag$/i)) {
+if (location.pathname.match(/tag/)) {
     $(document).ready(function () {
         setupTagSearch(createProjectTile);
     });

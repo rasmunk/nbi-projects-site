@@ -2,11 +2,11 @@ version: '3.7'
 
 services:
   web:
-    image: nielsbohr/nbi-projects-site:latest
-    container_name: nbi-projects-site
+    image: nielsbohr/escience-projects:latest
+    container_name: escience-projects
     ports:
       - "80:80/tcp"
     volumes:
-      - ./persistence:/var/nbi-projects-site/persistence:rw
-      - ./res:/var/nbi-projects-site/res:ro
-      - ./res/projects-envvars.py:/etc/projects/projects-envvars.py:ro
+      - ./persistence:/var/escience-projects/persistence:rw
+      - ./res:/etc/escience-projects/res:ro
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf:ro

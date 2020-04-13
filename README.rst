@@ -1,11 +1,11 @@
-.. image:: https://travis-ci.org/rasmunk/nbi-projects-site.svg?branch=master
-    :target: https://travis-ci.org/rasmunk/nbi-projects-site
+.. image:: https://travis-ci.org/rasmunk/escience-projects.svg?branch=master
+    :target: https://travis-ci.org/rasmunk/escience-projects
 
-======================
-escience-projects-site
-======================
+=================
+escience-projects
+=================
 
-Website for the `escience <www.nbi.ku.dk/Forskning/escience/>`_  department at
+Website for the `eScience <www.nbi.ku.dk/Forskning/escience/>`_  department at
 `KU <https://www.ku.dk>`_.
 It is used to list projects within and in collaboration with the department.
 This includes potential bachelor/master projects that students can undertake during their studies.
