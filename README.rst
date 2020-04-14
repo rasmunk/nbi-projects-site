@@ -1,9 +1,9 @@
 .. image:: https://travis-ci.org/ucphhpc/escience-projects-site.svg?branch=master
     :target: https://travis-ci.org/ucphhpc/escience-projects-site
 
-=================
-escience-projects
-=================
+======================
+escience-projects-site
+======================
 
 Website for the `eScience <www.nbi.ku.dk/Forskning/escience/>`_  department at
 `KU <https://www.ku.dk>`_.
