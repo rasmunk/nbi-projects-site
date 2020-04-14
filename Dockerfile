@@ -37,7 +37,6 @@ RUN pip3 install setuptools && \
     python3 setup.py install
 
 RUN rm -r /app
-# WORKDIR /var/escience-projects
 WORKDIR ${APPDIR}
 
 EXPOSE 80
