@@ -9,6 +9,9 @@ ENV APPNAME=${APP_NAME}
 ENV APPDIR=${APP_DIR}
 
 # Setup configuration
+# Ensure that the +TLS1.2 is only allowed
+RUN sed -i 's/SSLProtocol all -SSLv3/SSLProtocol -all +TLS1.2/g' /etc/apache2/mods-available/ssl.conf
+
 # Also enable wsgi and header modules
 COPY apache/apache2-http.conf /etc/apache2/sites-available/${SERVERNAME}.conf
 RUN a2dissite 000-default.conf && \
