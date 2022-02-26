@@ -1,4 +1,4 @@
-FROM nielsbohr/projects-site:latest
+FROM nielsbohr/projects-site:0.1.6
 
 ARG SERVER_NAME
 ARG APP_NAME
